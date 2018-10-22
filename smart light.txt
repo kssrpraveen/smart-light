@@ -1,0 +1,47 @@
+int light = 7, sensorPin = A0, sen = A1, sensorValue;
+long senValue;
+
+void setup()
+{
+ Serial.begin(9600);
+ pinMode(light,OUTPUT);
+ randomSeed(41);
+}
+
+int getDistance()
+{
+  // Using random values instead of ultrasonic sensor values 
+  return random(0,700);
+}
+
+
+int getSensorValue()
+{
+  return analogRead(sensorPin);
+}
+
+void loop()
+{
+  sensorValue = getSensorValue();
+  Serial.print("Sensor value is: ");
+  Serial.println(sensorValue);
+  if(sensorValue > 200)
+ {
+   digitalWrite(light, HIGH);
+ }
+ else
+  {
+   senValue = getDistance();
+   Serial.print("Distance of object is: ");
+   Serial.println(senValue);
+   if(senValue > 400)
+   {
+      digitalWrite(light, HIGH);
+   }
+   else
+   {
+      digitalWrite(light, LOW);
+   }
+    delay(1000);
+  }
+}
